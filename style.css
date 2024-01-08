@@ -1,0 +1,17 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-color: azure;
+}
+
+.container{
+    background-color: black;
+    display: flex;
+    height: 300px;
+    width: 250px;
+    flex-wrap: wrap;
+}
+
+.display{
+    background-color: gray;
+}
