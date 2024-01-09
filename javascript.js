@@ -15,8 +15,8 @@ function divide(a, b){
 }
 
 
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = '';
+let secondNumber = '';
 let op = '';
 let displayValue = '';
 let prevActions = '';
@@ -33,8 +33,19 @@ const eql = document.querySelector('#equals');
 // Update display when a number is pressed
 numbers.forEach(number => {
     number.addEventListener('click', () => {
+        cleanDisplay();
         displayValue += number.textContent;
         display.textContent = displayValue;
+
+        if(!firstNumber){
+            firstNumber = displayValue;
+            return
+        }
+
+        if(firstNumber){
+            secondNumber = displayValue;
+        }
+        
 
         if(displayValue.length === 25){
             displayValue = displayValue.slice(0, -1);
@@ -57,16 +68,22 @@ dlt.addEventListener('click', () => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
-        firstNumber = displayValue;
-        clearDisplay();
+         if(secondNumber){
+            firstNumber = operate(firstNumber, secondNumber, op);
+            prevDisplay.textContent = `${firstNumber} ${op}`;
+        }
         op = operator.textContent
+        prevDisplay.textContent = `${firstNumber} ${op}`;
+        
+       
     })
 })
 
 eql.addEventListener('click', () => {
     secondNumber = displayValue;
-    clearDisplay();
+    cleanDisplay();
     operate(firstNumber, secondNumber, op);
+    prevDisplay.textContent = `${firstNumber} ${op} ${secondNumber} = `;
 })
 
 function displayLengthCheck(){
@@ -76,8 +93,17 @@ function displayLengthCheck(){
 }
 
 function clearDisplay(){
+    prevActions = '';
     displayValue = '';
     display.textContent = 0;
+    prevDisplay.textContent = '`';
+    firstNumber = '';
+    secondNumber = '';
+}
+
+function cleanDisplay(){
+    displayValue = '';
+    display.textContent = displayValue;
 }
 
 function operate(num1, num2, operator){
@@ -86,17 +112,21 @@ function operate(num1, num2, operator){
     if(operator === '+'){
         displayValue = add(num1, num2);
         display.textContent = displayValue;
+        return displayValue;
     }
     if(operator === '-'){
         displayValue = subtract(num1, num2);
         display.textContent = displayValue;
+        return displayValue;
     }
     if(operator === '×'){
         displayValue = multiply(num1, num2);
         display.textContent = displayValue; 
+        return displayValue;
     }
     if(operator === '÷'){
         displayValue = divide(num1, num2);
         display.textContent = displayValue; 
+        return displayValue;
     }
 }
