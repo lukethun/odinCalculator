@@ -33,19 +33,8 @@ const eql = document.querySelector('#equals');
 // Update display when a number is pressed
 numbers.forEach(number => {
     number.addEventListener('click', () => {
-        cleanDisplay();
         displayValue += number.textContent;
         display.textContent = displayValue;
-
-        if(!firstNumber){
-            firstNumber = displayValue;
-            return
-        }
-
-        if(firstNumber){
-            secondNumber = displayValue;
-        }
-        
 
         if(displayValue.length === 25){
             displayValue = displayValue.slice(0, -1);
@@ -67,14 +56,24 @@ dlt.addEventListener('click', () => {
 })
 
 operators.forEach(operator => {
-    operator.addEventListener('click', () => {
-         if(secondNumber){
-            firstNumber = operate(firstNumber, secondNumber, op);
-            prevDisplay.textContent = `${firstNumber} ${op}`;
-        }
-        op = operator.textContent
-        prevDisplay.textContent = `${firstNumber} ${op}`;
+    operator.addEventListener('click', () => {     
+       if(!op) op = operator.textContent; 
+       if(!firstNumber){
+        firstNumber = displayValue;
+        cleanDisplay();
+        prevDisplay.textContent = `${firstNumber} ${op}  `;
+        return;
+       }
+       if(firstNumber){
         
+        secondNumber = displayValue;
+        firstNumber = operate(firstNumber, secondNumber, op);
+        op = operator.textContent; 
+        prevDisplay.textContent = `${firstNumber} ${op}`;
+        cleanDisplay();
+        
+       }
+       
        
     })
 })
@@ -84,6 +83,8 @@ eql.addEventListener('click', () => {
     cleanDisplay();
     operate(firstNumber, secondNumber, op);
     prevDisplay.textContent = `${firstNumber} ${op} ${secondNumber} = `;
+    firstNumber = '';
+    op = '';
 })
 
 function displayLengthCheck(){
@@ -99,6 +100,7 @@ function clearDisplay(){
     prevDisplay.textContent = '`';
     firstNumber = '';
     secondNumber = '';
+    op = '';
 }
 
 function cleanDisplay(){
