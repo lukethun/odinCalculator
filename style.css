@@ -4,14 +4,54 @@ body{
     background-color: azure;
 }
 
-.container{
-    background-color: black;
+.buttons{
     display: flex;
-    height: 300px;
-    width: 250px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .display{
-    background-color: gray;
+    box-sizing: border-box;
+    background-color: rgb(227, 236, 236);
+    height: 120px;
+    width: auto;
+    margin: 10px 10px 10px;
+    font-size: 40px;
+    padding: 10px;
+   border-radius: 10px;
+}
+
+.container{
+    height: 770px;
+    width: 530px;
+    padding: 15px;
+    background-color: #aaa;
+    border-radius: 20px;
+
+}
+
+.btn{
+   font-size: 20px;
+   height: 120px;
+   width: 120px;
+   margin: 5px;
+   align-items: center;
+   border-radius: 8px;
+}
+
+.clear,
+.delete{
+    width: 250px;
+    height: 100px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.box{
+    display: flex;
+    justify-content: center;
+}
+
+.operator{
+    background-color: rgb(243, 178, 56);
 }
