@@ -19,9 +19,11 @@ let firstNumber = 0;
 let secondNumber = 0;
 let op = '';
 let displayValue = '';
+let prevActions = '';
 
 const numbers = document.querySelectorAll('.number');
-const display = document.querySelector('.display');
+const display = document.querySelector('.current-display');
+const prevDisplay = document.querySelector('.prev-action')
 const clear = document.querySelector('.clear');
 const dlt = document.querySelector('.delete');
 const operators = document.querySelectorAll('.operator');

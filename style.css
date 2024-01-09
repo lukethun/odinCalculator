@@ -18,7 +18,11 @@ body{
     margin: 10px 10px 10px;
     font-size: 40px;
     padding: 10px;
-   border-radius: 10px;
+    border-radius: 10px
+}
+
+.prev-action{
+    text-align: right;
 }
 
 .container{
@@ -37,6 +41,16 @@ body{
    margin: 5px;
    align-items: center;
    border-radius: 8px;
+}
+
+.btn:hover,
+.clear:hover,
+.delete:hover{
+    background-color: #e4e4e4;
+}
+
+.operator:hover{
+    background-color: rgb(230, 167, 52)
 }
 
 .clear,
