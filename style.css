@@ -18,11 +18,13 @@ body{
     margin: 10px 10px 10px;
     font-size: 40px;
     padding: 10px;
-    border-radius: 10px
+    border-radius: 10px;
+    border: 2px solid rgb(158, 158, 158);
 }
 
 .prev-action{
     text-align: right;
+    height: 47px;
 }
 
 .container{
@@ -31,16 +33,17 @@ body{
     padding: 15px;
     background-color: #aaa;
     border-radius: 20px;
-
+    border: 2px solid black;
 }
 
 .btn{
-   font-size: 20px;
+   font-size: 25px;
    height: 120px;
    width: 120px;
    margin: 5px;
    align-items: center;
    border-radius: 8px;
+   border: 2px solid black;
 }
 
 .btn:hover,
@@ -59,6 +62,9 @@ body{
     height: 100px;
     margin: 5px;
     border-radius: 8px;
+    border: 2px solid black;
+    font-weight: 800;
+    font-size: 18px;
 }
 
 .box{

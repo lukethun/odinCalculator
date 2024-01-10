@@ -14,12 +14,10 @@ function divide(a, b){
     return a / b;
 }
 
-
 let firstNumber = '';
 let secondNumber = '';
 let op = '';
 let displayValue = '';
-let prevActions = '';
 
 const numbers = document.querySelectorAll('.number');
 const display = document.querySelector('.current-display');
@@ -28,6 +26,18 @@ const clear = document.querySelector('.clear');
 const dlt = document.querySelector('.delete');
 const operators = document.querySelectorAll('.operator');
 const eql = document.querySelector('#equals');
+const decimal = document.querySelector('#decimal');
+
+decimal.addEventListener('click', () => {
+    if(displayValue === ''){
+        displayValue = '0.';
+        display.textContent += '.';
+        return
+    }
+    if(display.textContent.includes('.')) return;
+    displayValue += '.';
+    display.textContent += '.';
+})
 
 
 // Update display when a number is pressed
@@ -36,7 +46,7 @@ numbers.forEach(number => {
         displayValue += number.textContent;
         display.textContent = displayValue;
 
-        if(displayValue.length === 25){
+        if(displayValue.length === 23){
             displayValue = displayValue.slice(0, -1);
             display.textContent = displayValue;
         }
@@ -45,7 +55,7 @@ numbers.forEach(number => {
 
 // Clear display when clear-button is clicked
 clear.addEventListener('click', () => {
-    clearDisplay();
+    clearData();
 })
 
 // Remove last digit of display
@@ -55,6 +65,7 @@ dlt.addEventListener('click', () => {
     displayLengthCheck();
 })
 
+// When +, -, ×, or ÷ is pressed
 operators.forEach(operator => {
     operator.addEventListener('click', () => {     
        if(!op) op = operator.textContent; 
@@ -62,6 +73,7 @@ operators.forEach(operator => {
         firstNumber = displayValue;
         cleanDisplay();
         prevDisplay.textContent = `${firstNumber} ${op}  `;
+        display.textContent = firstNumber;
         return;
        }
        if(firstNumber){
@@ -71,33 +83,34 @@ operators.forEach(operator => {
         op = operator.textContent; 
         prevDisplay.textContent = `${firstNumber} ${op}`;
         cleanDisplay();
-        
+        display.textContent = firstNumber;
        }
-       
-       
     })
 })
 
 eql.addEventListener('click', () => {
+    if(!firstNumber && !secondNumber) return;
     secondNumber = displayValue;
     cleanDisplay();
     operate(firstNumber, secondNumber, op);
     prevDisplay.textContent = `${firstNumber} ${op} ${secondNumber} = `;
+     // Clear operator and number selections for next equation
     firstNumber = '';
     op = '';
 })
 
+// Function to always keep 0 displayed
 function displayLengthCheck(){
     if(displayValue.length === 0){
         display.textContent = 0;
     }
 }
 
-function clearDisplay(){
-    prevActions = '';
+// Clear all data
+function clearData(){
     displayValue = '';
     display.textContent = 0;
-    prevDisplay.textContent = '`';
+    prevDisplay.textContent = '';
     firstNumber = '';
     secondNumber = '';
     op = '';
@@ -108,6 +121,7 @@ function cleanDisplay(){
     display.textContent = displayValue;
 }
 
+// Function the solves the equation
 function operate(num1, num2, operator){
     num1 = Number(num1);
     num2 = Number(num2);
@@ -127,6 +141,10 @@ function operate(num1, num2, operator){
         return displayValue;
     }
     if(operator === '÷'){
+        if(num2 === 0){
+            display.textContent = 'lmao';
+            return;
+        }
         displayValue = divide(num1, num2);
         display.textContent = displayValue; 
         return displayValue;
